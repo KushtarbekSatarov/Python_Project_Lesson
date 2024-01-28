@@ -1,0 +1,28 @@
+<!--product_detail.html-->
+<ul>
+    <li>
+        <p>{{ product_detail.title }}</p>
+        <p>{{ product_detail.text }}</p>
+        {% if product_detail.image%}
+            <img src="{{ product_detail.image.url }}" alt="{{ product_detail.title }}">
+        {% endif %}
+        <p>{{ product_detail.price }}</p>
+        <p>{{ product_detail.category }}</p>
+        <p>{{ product_detail.created_date }}</p>
+    </li>
+
+    <h2>Comments:    </h2>
+    {% for comment in product_detail.comment_set.all%}
+    <li>
+        <p>{{comment.author}}</p>
+        <p>{{comment.text}}</p>
+        <p>{{comment.created_date}}</p>
+    </li>
+    {% endfor %}
+</ul>
+
+<button onclick="window.location.href='{% url 'productUpdateView' product_detail.pk %}'">Change</button>
+<button onclick="window.location.href='{% url 'productListView' %}'">Cancel</button>
+<button onclick="window.location.href='{% url 'productDeleteView' product_detail.pk%}'">Delete</button>
+
+
